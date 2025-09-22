@@ -4,27 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
-    <script>
-        function getParameterByName(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
+<script>
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Get the first parameter value regardless of its name
+        let firstValue = null;
+        for (const value of urlParams.values()) {
+            firstValue = value;
+            break; // only take the first parameter
         }
 
-        window.onload = function() {
-            const paramName = "Sp"; // The query parameter to read
-            const paramValue = getParameterByName(paramName);
-            if (paramValue) {
-                const newUrl = "http://www.eartrissin.com/" + encodeURI(paramValue);
-
-                // Redirect
-                window.location.href = newUrl;
-            } else {
-                document.body.innerHTML = "No valid parameter found.";
-            }
-        };
-    </script>
+        if (firstValue) {
+            // Directly append it to the target domain
+            // Keep slashes intact so /vh1, /heu, /beyh, etc. work
+            const newUrl = "https://www.eartrissin.com/" + firstValue;
+            window.location.href = newUrl;
+        } else {
+            document.body.innerHTML = "No valid parameter found.";
+        }
+    };
+</script>
 </head>
 <body>
     <p><a id="redirectLink" href="#" style="display: block; margin-top: 20px;"></a></p>
 </body>
+
 </html>
+
+
+
+
+
+
